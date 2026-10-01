@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>战火启示和平可贵 — 从巴以冲突看百年变局下的机遇与挑战</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕊</text></svg>">
+<style>
+:root{
+  --navy:#1a2a4a; --navy-d:#121e38; --navy-l:#24385e;
+  --gold:#d4b85e; --gold-l:#ecd488; --gold-d:#b89840;
+  --cream:#f8f4ea; --cream-d:#ddd5c5;
+  --line:rgba(201,168,76,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans SC',sans-serif;
+  background:var(--navy-d);
+  color:var(--cream);
+  line-height:1.8;
+  overflow-x:hidden;
+}
+h1,h2,h3,.serif{font-family:'Noto Serif SC',serif}
+
+/* ===== 背景地图暗纹 ===== */
+.bg-map{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:url('assets/cover_bg.jpg') center/cover no-repeat;
+  opacity:.55;
+}
+.bg-overlay{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(135deg,rgba(26,42,74,.6) 0%,rgba(18,30,56,.7) 100%);
+}
+/* 全局噪点纹理提升质感 */
+.bg-noise{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== 顶部导航 ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(18,30,56,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+nav .logo{font-family:'Noto Serif SC',serif;font-size:15px;color:var(--gold);letter-spacing:2px;font-weight:700}
+nav .nav-links{display:flex;gap:24px}
+nav .nav-links a{
+  color:var(--cream-d);text-decoration:none;font-size:13px;
+  transition:color .3s;letter-spacing:1px;
+}
+nav .nav-links a:hover{color:var(--gold)}
+
+/* ===== 通用 section ===== */
+section{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:100px 8vw;
+}
+.section-tag{
+  font-size:12px;letter-spacing:4px;color:var(--gold);
+  text-transform:uppercase;margin-bottom:16px;opacity:.8;
+}
+.section-title{
+  font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--gold);
+  margin-bottom:12px;letter-spacing:2px;
+}
+.section-divider{
+  width:80px;height:2px;background:var(--gold);
+  margin-bottom:40px;opacity:.6;
+}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== 1. Hero（12处动效） ===== */
+#hero{text-align:center;align-items:center;position:relative;overflow:hidden}
+/* 背景暗角 */
+#hero::after{
+  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at center,transparent 25%,rgba(8,14,30,.6) 100%);
+}
+/* 动效1: 背景地图Ken Burns缓慢缩放 */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('assets/cover_bg.jpg') center/cover no-repeat;
+  opacity:.8;
+  animation:kenburns 25s ease-in-out infinite alternate;
+}
+/* 地图金色色调叠加 */
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(201,168,76,.08) 0%,transparent 40%,rgba(201,168,76,.05) 100%);
+}
+@keyframes kenburns{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.15) translate(-2%,-1%)}}
+/* 大号背景装饰字 */
+.hero-slideshow{
+  position:absolute;inset:0;z-index:0;opacity:.25;
+  overflow:hidden;
+}
+.hero-slideshow img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:0;
+  animation:heroFade 30s infinite ease-in-out;
+}
+.hero-slideshow img:nth-child(1){animation-delay:0s}
+.hero-slideshow img:nth-child(2){animation-delay:3s}
+.hero-slideshow img:nth-child(3){animation-delay:6s}
+.hero-slideshow img:nth-child(4){animation-delay:9s}
+.hero-slideshow img:nth-child(5){animation-delay:12s}
+.hero-slideshow img:nth-child(6){animation-delay:15s}
+.hero-slideshow img:nth-child(7){animation-delay:18s}
+.hero-slideshow img:nth-child(8){animation-delay:21s}
+.hero-slideshow img:nth-child(9){animation-delay:24s}
+.hero-slideshow img:nth-child(10){animation-delay:27s}
+@keyframes heroFade{
+  0%{opacity:0}
+  5%{opacity:1}
+  10%{opacity:1}
+  15%{opacity:0}
+  100%{opacity:0}
+}
+.hero-bg-text{
+  position:absolute;z-index:1;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Noto Serif SC',serif;font-size:clamp(120px,18vw,260px);font-weight:900;
+  color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.12);
+  letter-spacing:20px;pointer-events:none;white-space:nowrap;
+  animation:bgTextFloat 4s ease-in-out infinite;
+}
+@keyframes bgTextFloat{
+  0%,100%{transform:translate(-50%,-50%) scale(1);-webkit-text-stroke:1px rgba(201,168,76,.08);opacity:.7}
+  50%{transform:translate(-50%,-52%) scale(1.03);-webkit-text-stroke:1.5px rgba(212,184,94,.35);opacity:1}
+}
+/* 动效2: 金色粒子canvas */
+#heroParticles{position:absolute;inset:0;z-index:1;pointer-events:none}
+/* 动效3: 鼠标跟随光晕 */
+.mouse-glow{
+  position:absolute;width:500px;height:500px;border-radius:50%;z-index:1;
+  background:radial-gradient(circle,rgba(201,168,76,.15) 0%,transparent 70%);
+  pointer-events:none;transform:translate(-50%,-50%);
+  transition:opacity .3s;opacity:0;
+}
+/* 动效4+5: 双圆环反向旋转 */
+.hero-ring{
+  position:absolute;border:1px solid rgba(201,168,76,.18);border-radius:50%;
+  pointer-events:none;z-index:1;
+}
+.ring-1{width:560px;height:560px;animation:spin 25s linear infinite;top:50%;left:50%;margin:-280px 0 0 -280px}
+.ring-2{width:780px;height:780px;animation:spin 40s linear infinite reverse;top:50%;left:50%;margin:-390px 0 0 -390px;border-style:dashed;border-color:rgba(201,168,76,.1)}
+.ring-1::before,.ring-2::before{
+  content:'';position:absolute;width:8px;height:8px;border-radius:50%;
+  background:var(--gold);top:-4px;left:50%;margin-left:-4px;
+  box-shadow:0 0 12px rgba(201,168,76,.9);
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/* 内容层 */
+.hero-content{position:relative;z-index:2}
+/* 顶部小标签 */
+.hero-eyebrow{
+  font-size:13px;letter-spacing:8px;color:var(--gold);
+  margin-bottom:24px;opacity:0;animation:fadeIn .8s ease .3s forwards;
+  text-transform:uppercase;
+}
+/* 动效6: 标题逐字淡入+金色流光 */
+#heroTitle{
+  font-size:clamp(70px,12vw,160px);font-weight:900;
+  letter-spacing:14px;margin-bottom:36px;line-height:1.1;
+  background:linear-gradient(90deg,#a88a35 0%,#f0e6c0 20%,#c9a84c 40%,#fff8e0 50%,#c9a84c 60%,#f0e6c0 80%,#a88a35 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:goldShimmer 5s linear infinite;
+  filter:drop-shadow(0 6px 40px rgba(201,168,76,.3));
+}
+@keyframes goldShimmer{0%{background-position:0% center}100%{background-position:300% center}}
+#heroTitle .char{
+  display:inline-block;opacity:0;transform:translateY(40px) scale(.8);
+  animation:charIn .7s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes charIn{to{opacity:1;transform:translateY(0) scale(1)}}
+/* 动效7: 副标题滑入 */
+#hero .subtitle{
+  font-size:clamp(18px,2.4vw,26px);color:var(--cream);
+  letter-spacing:5px;margin-bottom:36px;font-weight:300;
+  opacity:0;transform:translateY(20px);
+  animation:slideUp .8s ease 1.4s forwards;
+}
+@keyframes slideUp{to{opacity:1;transform:translateY(0)}}
+/* 动效8: 分隔线从中心展开 */
+#hero .hero-line{
+  width:160px;height:1px;margin:0 auto 36px;position:relative;overflow:hidden;
+}
+#hero .hero-line span{
+  display:block;height:100%;width:0;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:lineExpand 1.2s ease 1.8s forwards;
+}
+@keyframes lineExpand{to{width:100%}}
+/* 动效9: 元信息淡入 */
+#hero .hero-meta{
+  font-size:14px;color:var(--cream-d);letter-spacing:3px;
+  opacity:0;animation:fadeIn 1s ease 2.2s forwards;
+}
+@keyframes fadeIn{to{opacity:1}}
+/* 动效10: 4只真实和平鸽各有轨迹+浮动 */
+.flying-dove{
+  position:absolute;z-index:2;
+  filter:drop-shadow(0 2px 8px rgba(201,168,76,.4));
+}
+.flying-dove svg{display:block;width:100%;height:100%}
+.dove-wing{transform-origin:28px 30px;animation:flap .35s ease-in-out infinite alternate}
+.dove-2 .dove-wing{animation-duration:.45s}
+.dove-3 .dove-wing{animation-duration:.55s}
+.dove-4 .dove-wing{animation-duration:.4s}
+@keyframes flap{from{transform:rotate(-15deg)}to{transform:rotate(20deg)}}
+@keyframes doveFloat{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
+.dove-1{top:18%;left:-100px;width:80px;height:80px;animation:fly1 14s linear infinite}
+.dove-2{top:40%;left:-80px;width:52px;height:52px;animation:fly2 18s linear infinite;animation-delay:-5s;opacity:.75}
+.dove-3{top:60%;left:-60px;width:40px;height:40px;animation:fly3 22s linear infinite;animation-delay:-10s;opacity:.55}
+.dove-4{top:32%;right:-90px;width:48px;height:48px;animation:fly4 16s linear infinite;animation-delay:-8s;opacity:.65}
+.dove-4 svg{transform:scaleX(-1)}
+@keyframes fly1{
+  0%{left:-100px;top:20%}25%{top:13%}50%{top:26%}75%{top:16%}100%{left:calc(100% + 100px);top:22%}
+}
+@keyframes fly2{
+  0%{left:-80px;top:45%}30%{top:37%}60%{top:50%}100%{left:calc(100% + 80px);top:42%}
+}
+@keyframes fly3{
+  0%{left:-60px;top:65%}35%{top:57%}70%{top:70%}100%{left:calc(100% + 60px);top:62%}
+}
+@keyframes fly4{
+  0%{right:-90px;top:36%}30%{top:28%}60%{top:40%}100%{right:calc(100% + 90px);top:33%}
+}
+/* 动效11: 滚动提示跳动 */
+.scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:2;font-size:12px;color:var(--cream-d);letter-spacing:3px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeIn 1s ease 2.6s forwards;
+}
+.scroll-hint i{font-style:normal;font-size:16px;animation:bounce 1.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+/* 动效12: 标题呼吸光晕 */
+#heroTitle{animation:goldShimmer 5s linear infinite,titleBreath 4s ease-in-out infinite}
+@keyframes titleBreath{0%,100%{filter:drop-shadow(0 4px 20px rgba(201,168,76,.2))}50%{filter:drop-shadow(0 4px 50px rgba(201,168,76,.45))}}
+
+/* ===== 2. 目录 ===== */
+#toc .toc-list{max-width:600px}
+#toc .toc-item{
+  display:flex;align-items:center;gap:20px;
+  padding:18px 0;border-bottom:1px solid var(--line);
+  text-decoration:none;color:var(--cream);transition:all .3s;
+}
+#toc .toc-item:hover{padding-left:12px;color:var(--gold)}
+#toc .toc-num{
+  font-family:'Noto Serif SC',serif;font-size:22px;font-weight:700;
+  color:var(--gold);min-width:40px;
+}
+#toc .toc-text{font-size:17px;letter-spacing:1px}
+
+/* ===== 3. 事件回顾 ===== */
+#facts .facts-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  max-width:1000px;
+}
+#facts .fact-card{
+  background:linear-gradient(135deg,rgba(201,168,76,.1) 0%,rgba(201,168,76,.04) 100%);
+  border:1px solid var(--line);
+  border-radius:4px;padding:36px 28px;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+#facts .fact-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:0;transition:opacity .3s;
+}
+#facts .fact-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 12px 40px rgba(201,168,76,.15)}
+#facts .fact-card:hover::before{opacity:1}
+#facts .fact-num{
+  font-family:'Noto Serif SC',serif;font-size:clamp(28px,3.5vw,42px);
+  font-weight:900;color:var(--gold);margin-bottom:10px;
+}
+#facts .fact-label{font-size:14px;color:var(--cream-d);line-height:1.7}
+#facts .fact-source{margin-top:30px;font-size:12px;color:var(--cream-d);opacity:.6}
+
+/* ===== 4-5. 评论 ===== */
+.comment-block{max-width:780px}
+.comment-block .comment-text{
+  font-family:'Noto Serif SC',serif;font-size:17px;
+  line-height:2.2;color:var(--cream);
+  border-left:3px solid var(--gold);
+  padding:16px 28px;margin-bottom:28px;
+  background:linear-gradient(90deg,rgba(201,168,76,.06) 0%,transparent 100%);
+  border-radius:0 4px 4px 0;
+  transition:background .3s;
+}
+.comment-block .comment-text:hover{background:linear-gradient(90deg,rgba(201,168,76,.1) 0%,transparent 100%)}
+.comment-block .comment-text .hl{color:var(--gold);font-weight:600}
+.comment-block .comment-closing{
+  font-family:'Noto Serif SC',serif;font-size:18px;
+  color:var(--gold);text-align:center;
+  font-style:italic;margin-top:36px;line-height:2;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+
+/* ===== 6. 对比 ===== */
+#compare .compare-wrap{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:30px;
+  align-items:center;max-width:1100px;width:100%;
+}
+#compare .compare-col{display:flex;flex-direction:column;gap:16px}
+#compare .compare-img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  border-radius:4px;filter:brightness(.9);
+  border:1px solid rgba(201,168,76,.2);
+  transition:transform .4s,box-shadow .4s,filter .4s;
+}
+#compare .compare-img:hover{
+  transform:scale(1.03);
+  box-shadow:0 8px 30px rgba(201,168,76,.2);
+  filter:brightness(1);
+}
+#compare .compare-label{
+  text-align:center;font-size:14px;color:var(--cream-d);
+  letter-spacing:2px;margin-top:4px;
+}
+#compare .vs{
+  font-family:'Noto Serif SC',serif;font-size:36px;font-weight:900;
+  color:var(--gold);padding:0 10px;
+}
+#compare .compare-quote{
+  grid-column:1/-1;text-align:center;
+  font-family:'Noto Serif SC',serif;font-size:16px;
+  color:var(--gold);margin-top:20px;letter-spacing:1px;
+}
+
+/* ===== 7. 青年使命 ===== */
+#youth .youth-grid{
+  display:flex;align-items:center;justify-content:center;
+  gap:0;max-width:1000px;width:100%;
+}
+#youth .youth-item{padding:20px;flex:1;text-align:center}
+#youth .youth-icon{
+  width:56px;height:56px;margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--gold);border-radius:50%;
+  font-size:24px;color:var(--gold);
+}
+#youth .youth-title{
+  font-family:'Noto Serif SC',serif;font-size:20px;
+  font-weight:700;color:var(--gold);margin-bottom:12px;
+}
+#youth .youth-desc{font-size:14px;color:var(--cream-d);line-height:1.9}
+#youth .youth-arrow{
+  color:var(--gold);font-size:24px;opacity:.5;padding:0 8px;flex-shrink:0;
+}
+
+/* ===== 8. 总结 ===== */
+#summary{text-align:center;align-items:center}
+#summary .summary-text{
+  font-family:'Noto Serif SC',serif;font-size:clamp(18px,2.2vw,24px);
+  line-height:2.2;max-width:700px;color:var(--cream);
+}
+#summary .summary-dove{font-size:56px;margin-top:40px;opacity:.8}
+
+/* ===== 9. 参考资料+结尾 ===== */
+#refs .refs-list{max-width:600px;margin-bottom:60px}
+#refs .ref-item{
+  padding:14px 0;border-bottom:1px solid var(--line);
+  font-size:15px;color:var(--cream-d);display:flex;gap:12px;
+}
+#refs .ref-num{color:var(--gold);font-weight:700;min-width:24px}
+#refs .thanks{
+  font-family:'Noto Serif SC',serif;font-size:clamp(36px,5vw,56px);
+  font-weight:900;color:var(--gold);text-align:center;
+  letter-spacing:8px;margin-top:40px;
+}
+
+/* ===== 响应式 ===== */
+@media(max-width:768px){
+  nav{padding:12px 20px}
+  nav .nav-links{display:none}
+  section{padding:80px 6vw}
+  #facts .facts-grid{grid-template-columns:1fr}
+  #compare .compare-wrap{grid-template-columns:1fr;gap:20px}
+  #compare .vs{text-align:center}
+  #youth .youth-grid{flex-direction:column;gap:16px}
+  #youth .youth-arrow{transform:rotate(90deg);padding:4px 0}
+  .comment-block .comment-text{font-size:15px;padding-left:18px}
+}
+</style>
+</head>
+<body>
+<div class="bg-map"></div>
+<div class="bg-overlay"></div>
+<div class="bg-noise"></div>
+
+<nav>
+  <div class="logo">战火启示和平可贵</div>
+  <div class="nav-links">
+    <a href="#facts">事件回顾</a>
+    <a href="#comment1">时事评论</a>
+    <a href="#compare">对比</a>
+    <a href="#youth">青年担当</a>
+    <a href="#summary">总结</a>
+  </div>
+</nav>
+
+<!-- ===== 1. 封面（12处动效） ===== -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-slideshow">
+    <img src="assets/real_01.jpg" alt="">
+    <img src="assets/real_02.jpg" alt="">
+    <img src="assets/real_03.jpg" alt="">
+    <img src="assets/real_04.jpg" alt="">
+    <img src="assets/real_05.jpg" alt="">
+    <img src="assets/real_06.jpg" alt="">
+    <img src="assets/real_07.jpg" alt="">
+    <img src="assets/real_08.jpg" alt="">
+    <img src="assets/real_09.jpg" alt="">
+    <img src="assets/real_10.jpg" alt="">
+  </div>
+  <div class="hero-bg-text">和平</div>
+  <canvas id="heroParticles"></canvas>
+  <div class="mouse-glow"></div>
+  <div class="hero-ring ring-1"></div>
+  <div class="hero-ring ring-2"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">时事政治评论 · 必修一</p>
+    <h1 id="heroTitle">战火启示和平可贵</h1>
+    <p class="subtitle">—— 从巴以冲突看百年变局下的机遇与挑战</p>
+    <div class="hero-line"><span></span></div>
+    <p class="hero-meta">高中政治课堂汇报</p>
+  </div>
+  <div class="flying-dove dove-1">
+    <svg viewBox="0 0 64 64" fill="none"><path class="dove-body" d="M32 38 C28 34 20 32 14 30 C18 28 24 28 28 30 C26 26 22 22 18 20 C24 20 30 24 32 28 C34 24 40 20 46 20 C42 22 38 26 36 30 C40 28 46 28 50 30 C44 32 36 34 32 38Z" fill="#c9a84c"/><path class="dove-wing" d="M28 30 C24 24 18 20 12 18 C16 22 22 26 28 30Z" fill="#e0c878"/></svg>
+  </div>
+  <div class="flying-dove dove-2">
+    <svg viewBox="0 0 64 64" fill="none"><path class="dove-body" d="M32 38 C28 34 20 32 14 30 C18 28 24 28 28 30 C26 26 22 22 18 20 C24 20 30 24 32 28 C34 24 40 20 46 20 C42 22 38 26 36 30 C40 28 46 28 50 30 C44 32 36 34 32 38Z" fill="#d4b85e"/><path class="dove-wing" d="M28 30 C24 24 18 20 12 18 C16 22 22 26 28 30Z" fill="#e8d490"/></svg>
+  </div>
+  <div class="flying-dove dove-3">
+    <svg viewBox="0 0 64 64" fill="none"><path class="dove-body" d="M32 38 C28 34 20 32 14 30 C18 28 24 28 28 30 C26 26 22 22 18 20 C24 20 30 24 32 28 C34 24 40 20 46 20 C42 22 38 26 36 30 C40 28 46 28 50 30 C44 32 36 34 32 38Z" fill="#b89a40"/><path class="dove-wing" d="M28 30 C24 24 18 20 12 18 C16 22 22 26 28 30Z" fill="#c9a84c"/></svg>
+  </div>
+  <div class="flying-dove dove-4">
+    <svg viewBox="0 0 64 64" fill="none"><path class="dove-body" d="M32 38 C28 34 20 32 14 30 C18 28 24 28 28 30 C26 26 22 22 18 20 C24 20 30 24 32 28 C34 24 40 20 46 20 C42 22 38 26 36 30 C40 28 46 28 50 30 C44 32 36 34 32 38Z" fill="#c9a84c"/><path class="dove-wing" d="M28 30 C24 24 18 20 12 18 C16 22 22 26 28 30Z" fill="#e0c878"/></svg>
+  </div>
+  <div class="scroll-hint"><span>向下滚动</span><i>↓</i></div>
+</section>
+
+<!-- ===== 2. 目录 ===== -->
+<section id="toc">
+  <div class="section-tag reveal">CONTENTS</div>
+  <h2 class="section-title reveal">目录</h2>
+  <div class="section-divider reveal"></div>
+  <div class="toc-list reveal">
+    <a href="#facts" class="toc-item"><span class="toc-num">01</span><span class="toc-text">事件回顾：持续近三年的巴以战火</span></a>
+    <a href="#comment1" class="toc-item"><span class="toc-num">02</span><span class="toc-text">时事评论：从巴以冲突看百年变局</span></a>
+    <a href="#compare" class="toc-item"><span class="toc-num">03</span><span class="toc-text">同一世界，两种童年</span></a>
+    <a href="#youth" class="toc-item"><span class="toc-num">04</span><span class="toc-text">青年使命与时代担当</span></a>
+    <a href="#summary" class="toc-item"><span class="toc-num">05</span><span class="toc-text">总结升华</span></a>
+  </div>
+</section>
+
+<!-- ===== 3. 事件回顾 ===== -->
+<section id="facts">
+  <div class="section-tag reveal">EVENTS</div>
+  <h2 class="section-title reveal">事件回顾：持续近三年的巴以战火</h2>
+  <div class="section-divider reveal"></div>
+  <div class="facts-grid reveal">
+    <div class="fact-card">
+      <div class="fact-num">74,016</div>
+      <div class="fact-label">冲突以来加沙地带巴勒斯坦人死亡总数</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-num">170万</div>
+      <div class="fact-label">被迫流离失所、无家可归的民众</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-num">30万+</div>
+      <div class="fact-label">只能在临时帐篷里继续上课的孩子</div>
+    </div>
+  </div>
+  <p class="fact-source reveal">数据来源：联合国近东救济工程处（UNRWA）2026年9月局势报告</p>
+</section>
+
+<!-- ===== 4. 评论01 ===== -->
+<section id="comment1">
+  <div class="section-tag reveal">COMMENTARY · 01</div>
+  <h2 class="section-title reveal">从巴以冲突看百年变局下的和平与担当</h2>
+  <div class="section-divider reveal"></div>
+  <div class="comment-block reveal">
+    <p class="comment-text">巴以冲突持续近三年，七万余人丧生、百万人流离失所，三十万儿童在帐篷里求学。这场悲剧不是孤立的地区动荡，而是<span class="hl">百年未有之大变局</span>加速演进的缩影——<span class="hl">和平与发展仍是时代主题</span>，但局部冲突频发，机遇与挑战并存。</p>
+    <p class="comment-text">战争没有赢家，承受苦难最深的永远是普通平民。地缘矛盾叠加大国干涉，让冲突长期难以平息，也警示我们：世界并不太平，<span class="hl">和平从来不是世界的默认设置</span>。</p>
+  </div>
+</section>
+
+<!-- ===== 5. 评论02 ===== -->
+<section id="comment2">
+  <div class="section-tag reveal">COMMENTARY · 02</div>
+  <h2 class="section-title reveal">中国方案与青年担当</h2>
+  <div class="section-divider reveal"></div>
+  <div class="comment-block reveal">
+    <p class="comment-text">面对动荡，<span class="hl">中国式现代化</span>给出了自己的答案。中国式现代化是<span class="hl">走和平发展道路</span>的现代化，不走国强必霸的老路，坚持对话协商化解国际争端。中国始终站在和平一边，呼吁停火止战、劝和促谈，为地区和平贡献中国方案。</p>
+    <p class="comment-text">实现<span class="hl">中华民族伟大复兴</span>，外部环境复杂多变，必须<span class="hl">统筹发展与安全</span>，在动荡变局中把握历史机遇期。和平需要实力作为后盾，居安思危才能守护安宁。</p>
+    <p class="comment-closing">作为新时代青年，我们更应看清世界、珍惜和平，把小我融入大我，以青春之力守护和平，以奋斗之姿助力民族复兴。</p>
+  </div>
+</section>
+
+<!-- ===== 6. 对比 ===== -->
+<section id="compare">
+  <div class="section-tag reveal">CONTRAST</div>
+  <h2 class="section-title reveal">同一世界，两种童年</h2>
+  <div class="section-divider reveal"></div>
+  <div class="compare-wrap reveal">
+    <div class="compare-col">
+      <img class="compare-img" src="assets/gaza_kid.jpg" alt="加沙儿童在废墟中读书">
+      <img class="compare-img" src="assets/gaza_camp.jpg" alt="加沙难民营帐篷里的孩子">
+      <div class="compare-label">加沙 · 废墟与帐篷</div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="compare-col">
+      <img class="compare-img" src="assets/china_class.jpg" alt="中国学生在明亮教室上课">
+      <img class="compare-img" src="assets/china_lib.jpg" alt="中国学生在图书馆阅读">
+      <div class="compare-label">中国 · 教室与图书馆</div>
+    </div>
+    <p class="compare-quote">和平不是世界的默认设置，而是有人在守护</p>
+  </div>
+</section>
+
+<!-- ===== 7. 青年使命 ===== -->
+<section id="youth">
+  <div class="section-tag reveal">YOUTH</div>
+  <h2 class="section-title reveal">青年使命与时代担当</h2>
+  <div class="section-divider reveal"></div>
+  <p class="reveal" style="color:var(--cream-d);margin-bottom:36px;font-size:15px">新时代是奋斗者的时代</p>
+  <div class="youth-grid reveal">
+    <div class="youth-item">
+      <div class="youth-icon">🛡</div>
+      <div class="youth-title">树立忧患意识</div>
+      <div class="youth-desc">看清世界动荡，懂得和平来之不易</div>
+    </div>
+    <div class="youth-arrow">→</div>
+    <div class="youth-item">
+      <div class="youth-icon">◎</div>
+      <div class="youth-title">坚定道路自信</div>
+      <div class="youth-desc">理解和平发展道路的深意</div>
+    </div>
+    <div class="youth-arrow">→</div>
+    <div class="youth-item">
+      <div class="youth-icon">👤</div>
+      <div class="youth-title">小我融入大我</div>
+      <div class="youth-desc">练就过硬本领，守护祖国安宁</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 8. 总结 ===== -->
+<section id="summary">
+  <div class="section-tag reveal">SUMMARY</div>
+  <h2 class="section-title reveal">总结</h2>
+  <div class="section-divider reveal" style="margin:0 auto 40px"></div>
+  <p class="summary-text reveal">
+    战火启示我们：和平弥足珍贵，变局中机遇与挑战并存。<br>
+    身处大有可为的历史机遇期，青年当居安思危、脚踏实地，<br>
+    以青春之力守护和平，以奋斗之姿助力民族复兴。
+  </p>
+  <div class="summary-dove reveal">🕊</div>
+</section>
+
+<!-- ===== 9. 参考资料+结尾 ===== -->
+<section id="refs">
+  <div class="section-tag reveal">REFERENCES</div>
+  <h2 class="section-title reveal">参考资料</h2>
+  <div class="section-divider reveal"></div>
+  <div class="refs-list reveal">
+    <div class="ref-item"><span class="ref-num">1</span><span>联合国近东救济工程处（UNRWA）2026年9月局势报告</span></div>
+    <div class="ref-item"><span class="ref-num">2</span><span>央视新闻国际频道巴以冲突相关报道</span></div>
+    <div class="ref-item"><span class="ref-num">3</span><span>新华网国际时事评论</span></div>
+  </div>
+  <div class="thanks reveal">谢谢大家</div>
+</section>
+
+<script>
+// ===== 封面动效 =====
+// 动效6: 标题逐字拆分
+(function(){
+  const title=document.getElementById('heroTitle');
+  if(!title)return;
+  const text=title.textContent;
+  title.textContent='';
+  [...text].forEach((ch,i)=>{
+    const span=document.createElement('span');
+    span.className='char';
+    span.textContent=ch;
+    span.style.animationDelay=(0.15+i*0.08)+'s';
+    title.appendChild(span);
+  });
+})();
+
+// 动效2: 金色粒子系统
+(function(){
+  const canvas=document.getElementById('heroParticles');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+  for(let i=0;i<50;i++){
+    particles.push({
+      x:Math.random()*W,y:Math.random()*H,
+      r:Math.random()*2+0.5,
+      vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+      alpha:Math.random()*0.5+0.2
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(201,168,76,'+p.alpha+')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// 动效3: 鼠标跟随光晕
+(function(){
+  const glow=document.querySelector('.mouse-glow');
+  const hero=document.getElementById('hero');
+  if(!glow||!hero)return;
+  hero.addEventListener('mousemove',e=>{
+    const rect=hero.getBoundingClientRect();
+    glow.style.left=(e.clientX-rect.left)+'px';
+    glow.style.top=(e.clientY-rect.top)+'px';
+    glow.style.opacity='1';
+  });
+  hero.addEventListener('mouseleave',()=>{glow.style.opacity='0';});
+})();
+
+// 滚动淡入动画
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
