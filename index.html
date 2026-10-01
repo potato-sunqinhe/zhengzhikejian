@@ -80,7 +80,7 @@ section{
 .reveal.visible{opacity:1;transform:translateY(0)}
 
 /* ===== 1. Hero（12处动效） ===== */
-#hero{text-align:center;align-items:center;position:relative;overflow:hidden}
+#hero{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
 /* 背景暗角 */
 #hero::after{
   content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
@@ -160,7 +160,7 @@ section{
 }
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 /* 内容层 */
-.hero-content{position:relative;z-index:2}
+.hero-content{position:relative;z-index:2;width:100%;text-align:center;padding:0 40px}
 /* 顶部小标签 */
 .hero-eyebrow{
   font-size:13px;letter-spacing:8px;color:var(--gold);
@@ -169,14 +169,15 @@ section{
 }
 /* 动效6: 标题逐字淡入+金色流光 */
 #heroTitle{
-  font-size:clamp(70px,12vw,160px);font-weight:900;
-  letter-spacing:14px;margin-bottom:36px;line-height:1.1;
-  background:linear-gradient(90deg,#a88a35 0%,#f0e6c0 20%,#c9a84c 40%,#fff8e0 50%,#c9a84c 60%,#f0e6c0 80%,#a88a35 100%);
+  font-size:clamp(44px,8vw,110px);font-weight:900;
+  letter-spacing:9px;margin-bottom:36px;line-height:1.1;
+  white-space:nowrap;display:inline-block;text-align:center;
+  background:linear-gradient(90deg,#7a6228 0%,#b8a050 20%,#9a8030 40%,#c8b468 50%,#9a8030 60%,#b8a050 80%,#7a6228 100%);
   background-size:300% auto;
   -webkit-background-clip:text;background-clip:text;
   -webkit-text-fill-color:transparent;
   animation:goldShimmer 5s linear infinite;
-  filter:drop-shadow(0 6px 40px rgba(201,168,76,.3));
+  filter:drop-shadow(0 4px 24px rgba(168,138,53,.25));
 }
 @keyframes goldShimmer{0%{background-position:0% center}100%{background-position:300% center}}
 #heroTitle .char{
@@ -246,8 +247,9 @@ section{
 .scroll-hint i{font-style:normal;font-size:16px;animation:bounce 1.5s ease-in-out infinite}
 @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 /* 动效12: 标题呼吸光晕 */
-#heroTitle{animation:goldShimmer 5s linear infinite,titleBreath 4s ease-in-out infinite}
-@keyframes titleBreath{0%,100%{filter:drop-shadow(0 4px 20px rgba(201,168,76,.2))}50%{filter:drop-shadow(0 4px 50px rgba(201,168,76,.45))}}
+#heroTitle{animation:titleFadeIn 1s cubic-bezier(.22,1,.36,1) .3s both,goldShimmer 5s linear infinite,titleBreath 4s ease-in-out infinite}
+@keyframes titleFadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes titleBreath{0%,100%{filter:drop-shadow(0 4px 16px rgba(168,138,53,.15))}50%{filter:drop-shadow(0 4px 36px rgba(168,138,53,.3))}}
 
 /* ===== 2. 目录 ===== */
 #toc .toc-list{max-width:600px}
@@ -367,7 +369,15 @@ section{
   font-family:'Noto Serif SC',serif;font-size:clamp(18px,2.2vw,24px);
   line-height:2.2;max-width:700px;color:var(--cream);
 }
-#summary .summary-dove{font-size:56px;margin-top:40px;opacity:.8}
+#summary .summary-dove{
+  font-size:56px;margin-top:40px;opacity:.8;
+  display:inline-block;
+  animation:doveFloat 3s ease-in-out infinite;
+}
+@keyframes doveFloat{
+  0%,100%{transform:translateY(0) rotate(-3deg);filter:drop-shadow(0 4px 12px rgba(201,168,76,.2))}
+  50%{transform:translateY(-12px) rotate(3deg);filter:drop-shadow(0 8px 24px rgba(201,168,76,.45))}
+}
 
 /* ===== 9. 参考资料+结尾 ===== */
 #refs .refs-list{max-width:600px;margin-bottom:60px}
@@ -400,17 +410,6 @@ section{
 <div class="bg-map"></div>
 <div class="bg-overlay"></div>
 <div class="bg-noise"></div>
-
-<nav>
-  <div class="logo">战火启示和平可贵</div>
-  <div class="nav-links">
-    <a href="#facts">事件回顾</a>
-    <a href="#comment1">时事评论</a>
-    <a href="#compare">对比</a>
-    <a href="#youth">青年担当</a>
-    <a href="#summary">总结</a>
-  </div>
-</nav>
 
 <!-- ===== 1. 封面（12处动效） ===== -->
 <section id="hero">
@@ -451,7 +450,6 @@ section{
   <div class="flying-dove dove-4">
     <svg viewBox="0 0 64 64" fill="none"><path class="dove-body" d="M32 38 C28 34 20 32 14 30 C18 28 24 28 28 30 C26 26 22 22 18 20 C24 20 30 24 32 28 C34 24 40 20 46 20 C42 22 38 26 36 30 C40 28 46 28 50 30 C44 32 36 34 32 38Z" fill="#c9a84c"/><path class="dove-wing" d="M28 30 C24 24 18 20 12 18 C16 22 22 26 28 30Z" fill="#e0c878"/></svg>
   </div>
-  <div class="scroll-hint"><span>向下滚动</span><i>↓</i></div>
 </section>
 
 <!-- ===== 2. 目录 ===== -->
@@ -589,21 +587,6 @@ section{
 
 <script>
 // ===== 封面动效 =====
-// 动效6: 标题逐字拆分
-(function(){
-  const title=document.getElementById('heroTitle');
-  if(!title)return;
-  const text=title.textContent;
-  title.textContent='';
-  [...text].forEach((ch,i)=>{
-    const span=document.createElement('span');
-    span.className='char';
-    span.textContent=ch;
-    span.style.animationDelay=(0.15+i*0.08)+'s';
-    title.appendChild(span);
-  });
-})();
-
 // 动效2: 金色粒子系统
 (function(){
   const canvas=document.getElementById('heroParticles');
